@@ -13,14 +13,14 @@ const api = require('./api')
 const app = express()
 
 mongoose.Promise = global.Promise
-mongoose.connect(`mongodb://${project.db_host}/${project.db_name}`)
+// mongoose.connect(`mongodb://${project.db_host}/${project.db_name}`)
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use('/api', api)
+// app.use('/api', api)
 
 // Apply gzip compression
 app.use(compress())
