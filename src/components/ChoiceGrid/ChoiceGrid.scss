@@ -1,0 +1,14 @@
+.choice-grid {
+  .choice-line {
+    .choice-cell {
+      cursor: pointer;
+      &:hover {
+        background-color: lightgray;
+      }
+      &.selected {
+        background-color: gray;
+        color: white;
+      }
+    }
+  }
+}

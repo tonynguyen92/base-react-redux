@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: mongo
+  web:
+    build: .
+    links:
+      - db
+    environment:
+      - DB_HOST=db
+    ports:
+      - '3000:3000'
+    command: npm run dev
