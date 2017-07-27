@@ -12,6 +12,10 @@ const api = require('./api')
 
 const app = express()
 
+const environment = {
+  API_DOMAIN: project.api_domain
+};
+
 mongoose.Promise = global.Promise
 // mongoose.connect(`mongodb://${project.db_host}/${project.db_name}`)
 
@@ -60,9 +64,6 @@ if (project.env === 'development') {
   // rendering, you'll want to remove this middleware.
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
-    var environment = {
-        API_DOMAIN: project.api_domain
-      };
     res.render(filename, {
       ENVIRONMENT: environment
     });
@@ -88,9 +89,6 @@ if (project.env === 'development') {
   // rendering, you'll want to remove this middleware.
   app.use('*', function (req, res, next) {
     const filename = path.join(project.paths.dist(), 'index.html')
-    var environment = {
-        API_DOMAIN: project.api_domain
-      };
     res.render(filename, {
       ENVIRONMENT: environment
     });
