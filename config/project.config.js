@@ -3,6 +3,7 @@ const path = require('path')
 const debug = require('debug')('app:config:project')
 const argv = require('yargs').argv
 const ip = require('ip')
+const _ = require('lodash')
 
 debug('Creating default configuration.')
 // ========================================================
@@ -10,7 +11,7 @@ debug('Creating default configuration.')
 // ========================================================
 const config = {
   env : process.env.NODE_ENV || 'development',
-
+  api_domain: 'https://oct-api.inspicorp.com',
   // ----------------------------------
   // Project Structure
   // ----------------------------------
@@ -126,14 +127,7 @@ config.paths = {
 // ========================================================
 // Environment Configuration
 // ========================================================
-debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments.config')
-const overrides = environments[config.env]
-if (overrides) {
-  debug('Found overrides, applying to default configuration.')
-  Object.assign(config, overrides(config))
-} else {
-  debug('No environment overrides found, defaults will be used.')
-}
+const environments = require('./config.' + config.env);
+const mergedConfig = _.merge(config, environments || {});
 
-module.exports = config
+module.exports = mergedConfig
